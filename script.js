@@ -4,7 +4,7 @@ import * as pdfjsLib from './pdf.js/pdf.mjs';
 // Point to the worker MJS
 pdfjsLib.GlobalWorkerOptions.workerSrc = './pdf.js/pdf.worker.mjs';
 
-const url = './portfolio.pdf'; // your PDF file
+const url = 'portfolio.pdf'; // your PDF file
 
 let pdfDoc = null,
     pageNum = 1,
@@ -81,4 +81,5 @@ pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
 document.getElementById('prev').addEventListener('click', onPrevPage);
 document.getElementById('next').addEventListener('click', onNextPage);
 document.getElementById('zoom-in').addEventListener('click', zoomIn);
+
 document.getElementById('zoom-out').addEventListener('click', zoomOut);
