@@ -1,52 +1,64 @@
-/* Gradient background */
-body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #FFDEE9, #B5FFFC, #FFEAB3, #D4A5A5);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #333;
+/* Minimal modern styling: PDF-first, unobtrusive controls */
+:root{
+  --bg-a: #fff7fb;
+  --bg-b: #f1fff6;
+  --fg: #0f1720;
+  --muted: rgba(15,23,32,0.55);
+  --accent: rgba(15,23,32,0.08);
 }
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;color:var(--fg);-webkit-font-smoothing:antialiased}
+body{
+  background: linear-gradient(120deg,var(--bg-a),var(--bg-b));
+  display:flex;align-items:stretch;justify-content:center;
 }
 
-header {
-    text-align: center;
-    margin: 2rem 0;
+/* container */
+.wrap{width:100%;max-width:1400px;margin:20px;display:flex;flex-direction:column;gap:14px}
+
+/* top brand */
+.topbar{display:flex;align-items:center;justify-content:flex-start;padding:12px 8px}
+.brand strong{font-size:18px;letter-spacing:0.3px}
+.brand .sub{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+/* stage: center viewer and arrows */
+.stage{display:flex;align-items:center;justify-content:center;gap:12px;flex:1;min-height:60vh;position:relative}
+
+/* overlay arrow: subtle circular, centered vertically */
+.arrow{
+  border:0;background:linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0.6));
+  width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:28px;color:var(--muted);cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition:transform .12s ease, color .12s ease, box-shadow .12s ease;backdrop-filter:blur(6px);
+}
+.arrow:hover{transform:translateY(-3px);color:var(--fg);box-shadow:0 14px 30px rgba(0,0,0,0.12)}
+.arrow.left{margin-left:6px}
+.arrow.right{margin-right:6px}
+
+/* viewer: big, centered, rounded small radius */
+.viewer{
+  background: #fff;
+  width: min(1200px, 96vw);
+  height: min(88vh, calc(100vh - 160px));
+  border-radius:10px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+  box-shadow: 0 18px 60px rgba(2,6,23,0.08);
 }
 
-h1 {
-    font-size: 3rem;
-    margin: 0;
+/* canvas responsive */
+#pdf-canvas{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
+
+/* page indicator: small, semi-transparent at bottom center */
+.page-indicator{
+  position:absolute;left:50%;transform:translateX(-50%);bottom:12px;
+  background: rgba(0,0,0,0.6);color:#fff;padding:6px 10px;border-radius:18px;font-size:13px;
+  font-weight:600;letter-spacing:0.3px;
+  pointer-events:none;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#pdf-controls {
-    margin-bottom: 1rem;
-}
-
-button {
-    margin: 0 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-canvas {
-    border: 2px solid #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    max-width: 90vw;
-    max-height: 80vh;
+/* responsive: on small screens hide arrows */
+@media (max-width:720px){
+  .arrow{display:none}
+  .viewer{width:100vw;height:82vh;border-radius:0}
+  .wrap{margin:0}
 }

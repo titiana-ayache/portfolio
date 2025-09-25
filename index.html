@@ -1,30 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Titiana Ayache - Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Titiana Ayache - Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <header>
-        <h1>Titiana Ayache</h1>
-        <p>Fashion Designer Portfolio</p>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <strong>Titiana Ayache</strong>
+        <span class="sub">Fashion Portfolio</span>
+      </div>
     </header>
 
-    <main>
-        <div id="pdf-controls">
-            <button id="prev">⬅️ Previous</button>
-            <button id="next">Next ➡️</button>
-            <span>Page: <span id="page-num">1</span> / <span id="page-count">--</span></span>
-            <button id="zoom-in">➕ Zoom</button>
-            <button id="zoom-out">➖ Zoom</button>
-        </div>
+    <main class="stage" id="stage">
+      <button id="prev" class="arrow left" aria-label="Previous page">‹</button>
 
-        <canvas id="pdf-render"></canvas>
+      <div id="viewer" class="viewer" tabindex="0">
+        <canvas id="pdf-canvas" role="img" aria-label="PDF page"></canvas>
+        <div class="page-indicator" id="page-indicator">1 / --</div>
+      </div>
+
+      <button id="next" class="arrow right" aria-label="Next page">›</button>
     </main>
+  </div>
 
-    <!-- Load your script as a module -->
-    <script type="module" src="script.js"></script>
+  <script type="module" src="script.js"></script>
 </body>
 </html>
