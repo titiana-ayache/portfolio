@@ -1,0 +1,52 @@
+/* Gradient background */
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #FFDEE9, #B5FFFC, #FFEAB3, #D4A5A5);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+header {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#pdf-controls {
+    margin-bottom: 1rem;
+}
+
+button {
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+canvas {
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    max-width: 90vw;
+    max-height: 80vh;
+}

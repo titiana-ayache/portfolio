@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titiana Ayache - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Titiana Ayache</h1>
+        <p>Fashion Designer Portfolio</p>
+    </header>
+
+    <main>
+        <div id="pdf-controls">
+            <button id="prev">⬅️ Previous</button>
+            <button id="next">Next ➡️</button>
+            <span>Page: <span id="page-num">1</span> / <span id="page-count">--</span></span>
+            <button id="zoom-in">➕ Zoom</button>
+            <button id="zoom-out">➖ Zoom</button>
+        </div>
+
+        <canvas id="pdf-render"></canvas>
+    </main>
+
+    <!-- Load your script as a module -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>
