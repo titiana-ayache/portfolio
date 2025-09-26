@@ -1,32 +1,37 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Titiana Ayache - Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="wrap">
-    <header class="topbar">
-      <div class="brand">
-        <strong>Titiana Ayache</strong>
-        <span class="sub">Fashion Portfolio</span>
-      </div>
-    </header>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Titiana Ayache - Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="topbar">
+        <div class="brand">
+          <strong>Titiana Ayache</strong>
+          <span class="sub">Fashion Portfolio</span>
+        </div>
+      </header>
 
-    <main class="stage" id="stage">
-      <button id="prev" class="arrow left" aria-label="Previous page">‹</button>
+      <main class="stage" id="stage">
+        <button id="prev" class="arrow left" aria-label="Previous page">
+          ‹
+        </button>
 
-      <div id="viewer" class="viewer" tabindex="0">
-        <canvas id="pdf-canvas" role="img" aria-label="PDF page"></canvas>
-        <div class="page-indicator" id="page-indicator">1 / --</div>
-      </div>
+        <div id="viewer" class="viewer" tabindex="0">
+          <canvas id="pdf-canvas" role="img" aria-label="PDF page"></canvas>
+          <div class="page-indicator" id="page-indicator">1 / --</div>
+          <div class="loading-overlay" id="loading-overlay">
+            <div class="spinner"></div>
+          </div>
+        </div>
 
-      <button id="next" class="arrow right" aria-label="Next page">›</button>
-    </main>
-  </div>
+        <button id="next" class="arrow right" aria-label="Next page">›</button>
+      </main>
+    </div>
 
-  <script type="module" src="script.js"></script>
-</body>
+    <script type="module" src="script.js"></script>
+  </body>
 </html>

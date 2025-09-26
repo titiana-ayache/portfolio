@@ -63,6 +63,34 @@ body{
   pointer-events:none;
 }
 
+/* loading overlay with spinner */
+.loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(15,23,32,0.15);
+  border-top-color: var(--fg);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* responsive: on small screens hide arrows */
 @media (max-width:720px){
   .arrow{display:none}

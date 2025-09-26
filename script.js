@@ -1,4 +1,4 @@
-// script.js - PDF viewer with natural aspect ratio and Ctrl+wheel zoom
+// script.js - PDF viewer with natural aspect ratio, Ctrl+wheel zoom, and loading overlay
 import * as pdfjsLib from './pdf.js/pdf.mjs';
 pdfjsLib.GlobalWorkerOptions.workerSrc = './pdf.js/pdf.worker.mjs';
 
@@ -8,6 +8,7 @@ const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
 const indicator = document.getElementById('page-indicator');
 const viewer = document.getElementById('viewer');
+const loadingOverlay = document.getElementById('loading-overlay');
 
 const URL = 'portfolio.pdf';
 
@@ -25,11 +26,9 @@ function pickBestScaleForPage(page) {
   const availH = viewer.clientHeight;
   const availW = viewer.clientWidth;
 
-  // scale based on height first
   const scaleH = availH / v1.height;
   const scaledWidth = v1.width * scaleH;
 
-  // if width fits container, use it; else scale down to width
   return scaledWidth <= availW ? scaleH : availW / v1.width;
 }
 
@@ -37,7 +36,6 @@ function pickBestScaleForPage(page) {
 function prepareCanvas(viewport) {
   const dpr = Math.max(1, window.devicePixelRatio || 1);
 
-  // compute scale to fit height, preserve aspect ratio
   const maxHeight = viewer.clientHeight;
   const scaleFactor = maxHeight / viewport.height;
 
@@ -57,6 +55,8 @@ function prepareCanvas(viewport) {
 // render page n
 function renderPage(n) {
   rendering = true;
+  loadingOverlay.style.display = 'flex'; // show loading
+
   pdfDoc.getPage(n).then(page => {
     const viewport = page.getViewport({ scale });
     prepareCanvas(viewport);
@@ -65,14 +65,17 @@ function renderPage(n) {
     renderTask.promise.then(() => {
       rendering = false;
       updateUI();
+      loadingOverlay.style.display = 'none'; // hide loading
       if (pending !== null) { const p = pending; pending = null; renderPage(p); }
     }).catch(err => {
       console.error('Render error', err);
       rendering = false;
+      loadingOverlay.style.display = 'none';
     });
   }).catch(err => {
     console.error('Page load error', err);
     rendering = false;
+    loadingOverlay.style.display = 'none';
   });
 }
 
@@ -152,7 +155,7 @@ viewer.addEventListener('wheel', e => {
 const ro = new ResizeObserver(() => {
   if (!pdfDoc) return;
   if (fitMode === 'auto' || fitMode === 'width' || fitMode === 'page') computeInitialScaleAndRender();
-  else queueRender(pageNum); // keep custom scale
+  else queueRender(pageNum);
 });
 ro.observe(viewer);
 
@@ -164,5 +167,5 @@ pdfjsLib.getDocument(URL).promise.then(pdf => {
   updateUI();
 }).catch(err => {
   console.error('Failed to load PDF', err);
-  indicator.textContent = 'Failed to load';
+  loadingOverlay.textContent = 'Failed to load';
 });
