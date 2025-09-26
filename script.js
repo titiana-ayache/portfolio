@@ -36,11 +36,13 @@ function pickBestScaleForPage(page) {
 function prepareCanvas(viewport) {
   const dpr = Math.max(1, window.devicePixelRatio || 1);
 
-  const maxHeight = viewer.clientHeight;
-  const scaleFactor = maxHeight / viewport.height;
+  // compute scale so PDF fits inside viewer both vertically and horizontally
+  const scaleX = viewer.clientWidth / viewport.width;
+  const scaleY = viewer.clientHeight / viewport.height;
+  const finalScale = Math.min(scaleX, scaleY);
 
-  const scaledWidth = viewport.width * scaleFactor;
-  const scaledHeight = viewport.height * scaleFactor;
+  const scaledWidth = viewport.width * finalScale;
+  const scaledHeight = viewport.height * finalScale;
 
   canvas.width = Math.floor(viewport.width * dpr);
   canvas.height = Math.floor(viewport.height * dpr);
