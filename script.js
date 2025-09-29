@@ -162,7 +162,10 @@ const ro = new ResizeObserver(() => {
 ro.observe(viewer);
 
 // load PDF and initial render
-pdfjsLib.getDocument(URL).promise.then(pdf => {
+pdfjsLib.getDocument({
+  url : URL,
+  wasmUrl : './pdf.js/wasm/'
+}).promise.then(pdf => {
   pdfDoc = pdf;
   fitMode = 'auto';
   computeInitialScaleAndRender();
